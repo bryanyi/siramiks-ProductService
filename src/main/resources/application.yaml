@@ -18,6 +18,8 @@ supabase:
     password: ${SUPABASE_DATABASE_PASSWORD}
 
 spring:
+  application:
+    name: PRODUCT-SERVICE
   datasource:
     url: ${SUPABASE_DATABASE_URL}
     username: ${SUPABASE_DATABASE_USER}
@@ -32,8 +34,6 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
-  application:
-    name: PRODUCT_SERVICE
 
 eureka:
   instance:
