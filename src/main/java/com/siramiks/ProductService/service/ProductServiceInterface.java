@@ -13,4 +13,6 @@ public interface ProductServiceInterface {
   List<Product> getAllProducts();
 
   ProductResponse getProductById(UUID productId);
+
+  Long decreaseQuantity(UUID productId, long quantity);
 }

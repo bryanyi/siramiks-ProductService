@@ -62,4 +62,20 @@ public class ProductService implements ProductServiceInterface {
     return productResponse;
   }
 
+  public Long decreaseQuantity(UUID productId, long qtyToDecrease) {
+    log.info("Decreasing quantity for productId: {} by {}", productId, qtyToDecrease);
+    Product product = productRepository.findByProductId(productId)
+            .orElseThrow(() -> new ProductServiceException("Product id not found", "PRODUCT_NOT_FOUND"));
+
+    if (product.getQuantity() < qtyToDecrease) {
+      throw new ProductServiceException("Not enough in stock!", "INSUFFICIENT_QUANTITY");
+    }
+
+    product.setQuantity(product.getQuantity() - qtyToDecrease);
+    productRepository.save(product);
+    log.info("Product stock count successfully updated. New stock count is {}", product.getQuantity());
+
+    return product.getQuantity();
+  }
+
 }

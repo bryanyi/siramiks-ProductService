@@ -4,6 +4,7 @@ import com.siramiks.ProductService.entity.Product;
 import com.siramiks.ProductService.model.ProductRequest;
 import com.siramiks.ProductService.model.ProductResponse;
 import com.siramiks.ProductService.service.ProductService;
+import jakarta.ws.rs.PUT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,5 +36,11 @@ public class ProductController {
   public ResponseEntity<ProductResponse> addProduct(@RequestBody ProductRequest productRequest) {
     ProductResponse productResponse = productService.addProduct(productRequest);
     return new ResponseEntity<>(productResponse, HttpStatus.CREATED);
+  }
+
+  @PutMapping("/decreaseQuantity/{productId}")
+  public ResponseEntity<Long> decreaseQuantity(@PathVariable("productId") UUID productId, @RequestParam long qtyToDecrease) {
+    long newQuantity = productService.decreaseQuantity(productId, qtyToDecrease);
+    return new ResponseEntity<>(newQuantity, HttpStatus.OK);
   }
 }
