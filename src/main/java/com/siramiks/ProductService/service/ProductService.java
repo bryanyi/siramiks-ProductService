@@ -78,4 +78,28 @@ public class ProductService implements ProductServiceInterface {
     return product.getQuantity();
   }
 
+  public boolean hasEnoughStock(UUID productId, long qtyToDecrease) {
+    Product product = productRepository.findByProductId(productId)
+            .orElseThrow(() -> new ProductServiceException("Product id not found", "PRODUCT_NOT_FOUND"));
+
+    if (product.getQuantity() > qtyToDecrease) {
+      return true;
+    }
+
+    return false;
+  }
+
+  public boolean hasEnoughStock(UUID[] productIds, long qtyToDecrease) {
+    for (UUID productId : productIds) {
+      Product product = productRepository.findByProductId(productId)
+              .orElseThrow(() -> new ProductServiceException("Product id not found", "PRODUCT_NOT_FOUND"));
+
+      if (product.getQuantity() < qtyToDecrease) {
+        return false;
+      }
+
+    }
+    return true;
+  }
+
 }

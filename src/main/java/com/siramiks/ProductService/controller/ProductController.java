@@ -37,6 +37,11 @@ public class ProductController {
     return new ResponseEntity<>(productResponse, HttpStatus.CREATED);
   }
 
+  @PutMapping("/checkStock/{productId}")
+  public ResponseEntity<Boolean> hasEnoughStock(@PathVariable("productId") UUID productId, @RequestParam long qtyToDecrease) {
+    return new ResponseEntity<>(productService.hasEnoughStock(productId, qtyToDecrease), HttpStatus.OK);
+  }
+
   @PutMapping("/decreaseQuantity/{productId}")
   public ResponseEntity<Long> decreaseQuantity(@PathVariable("productId") UUID productId, @RequestParam long qtyToDecrease) {
     long newQuantity = productService.decreaseQuantity(productId, qtyToDecrease);
