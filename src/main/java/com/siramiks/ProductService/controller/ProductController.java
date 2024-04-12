@@ -13,7 +13,11 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/product")
+@RequestMapping(
+        value = "/api/v1/product",
+        produces = "application/json",
+        method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}
+)
 public class ProductController {
 
   @Autowired
