@@ -22,7 +22,7 @@ spring:
   application:
     name: PRODUCT-SERVICE
   datasource:
-    url: ${SUPABASE_DATABASE_URL}
+    url: jdbc:postgresql://${SUPABASE_URL}:6543/postgres?user=${SUPABASE_DATABASE_USER}&password=${SUPABASE_DATABASE_PASSWORD}
     username: ${SUPABASE_DATABASE_USER}
     password: ${SUPABASE_DATABASE_PASSWORD}
     driverClassName: org.postgresql.Driver
